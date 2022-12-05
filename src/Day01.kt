@@ -2,12 +2,12 @@ fun main() {
     fun part1(input: List<String>): Int {
         return input.splitBy { it.isEmpty() }
             .map { it.map { s -> s.toInt() } }
-            .map { it.fold(0) {acc, curr -> acc + curr} }
-            .max()
+            .maxOfOrNull { it.fold(0) { acc, curr -> acc + curr } } ?: throw IllegalArgumentException()
     }
 
     fun part2(input: List<String>): Int {
         return input.splitBy { it.isEmpty() }
+            .asSequence()
             .map { it.map { s -> s.toInt() } }
             .map { it.sum() }
             .sortedDescending()

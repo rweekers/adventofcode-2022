@@ -31,7 +31,7 @@ fun main() {
 }
 
 class Assignments(private val start: Int, private val end: Int) {
-    fun size(): Int =
+    private fun size(): Int =
         end - start
 
     private fun fullyOverlaps(other: Assignments): Boolean =

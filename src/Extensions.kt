@@ -30,3 +30,17 @@ fun String.commonCharacters(other: String): String =
             acc
         }
     }
+
+typealias Stack<T> = ArrayDeque<T>
+
+fun <T> Stack<T>.push(element: T) = addLast(element)
+
+fun <T> Stack<T>.pop() = removeLastOrNull()
+
+fun <T> Stack<T>.push(elements: List<T>) = addAll(elements)
+
+fun <T> Stack<T>.pop(elements: Int): List<T> {
+    val e = takeLast(elements)
+    repeat((1..elements).count()) { this.removeLast() }
+    return e
+}
