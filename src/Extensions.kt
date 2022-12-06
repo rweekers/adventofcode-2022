@@ -31,6 +31,11 @@ fun String.commonCharacters(other: String): String =
         }
     }
 
+fun String.allDifferentCharacters(): Boolean {
+    return this.filterIndexed { index, c -> this.removeRange(index, index + 1).any { it == c } }
+        .firstOrNull() == null
+}
+
 typealias Stack<T> = ArrayDeque<T>
 
 fun <T> Stack<T>.push(element: T) = addLast(element)
