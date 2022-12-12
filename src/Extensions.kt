@@ -1,3 +1,5 @@
+import java.util.function.Predicate
+
 fun <T> List<T>.splitBy(predicate: (T) -> Boolean): List<List<T>> {
     if (isEmpty()) return listOf(this)
     val list = mutableListOf<List<T>>()
@@ -34,6 +36,16 @@ fun String.commonCharacters(other: String): String =
 fun String.allDifferentCharacters(): Boolean {
     return this.filterIndexed { index, c -> this.removeRange(index, index + 1).any { it == c } }
         .firstOrNull() == null
+}
+
+fun List<Int>.takeUntil(predicate: Predicate<Int>): List<Int> {
+    val filtered = mutableListOf<Int>()
+    this.asSequence()
+        .forEach {
+            filtered.add(it)
+            if (!predicate.test(it)) return filtered
+        }
+    return filtered
 }
 
 typealias Stack<T> = ArrayDeque<T>
