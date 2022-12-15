@@ -8,8 +8,11 @@ fun <T> List<T>.splitBy(predicate: (T) -> Boolean): List<List<T>> {
         if (predicate(v)) {
             list.add(this.subList(index, i))
             index = i + 1
-        } else if (this.subList(index, this.size).none { predicate(it) }) {
-            list.add(this.subList(index, i + 1))
+        } else if (this.subList(index, this.size).isNotEmpty() && this.subList(index, this.size)
+                .none { predicate(it) }
+        ) {
+            list.add(this.subList(index, this.size))
+            index = this.size
         }
     }
     return list
