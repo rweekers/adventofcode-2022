@@ -14,6 +14,14 @@ data class Point(val x: Int, val y: Int) {
     fun touches(otherPoint: Point): Boolean =
         (this.x - otherPoint.x).absoluteValue <= 1 && (this.y - otherPoint.y).absoluteValue <= 1
 
+    fun cardinalNeighbors(): Set<Point> =
+        setOf(
+            copy(x = x - 1),
+            copy(x = x + 1),
+            copy(y = y - 1),
+            copy(y = y + 1)
+        )
+
     fun lineTo(that: Point): List<Point> {
         val xDelta = (that.x - x).sign
         val yDelta = (that.y - y).sign

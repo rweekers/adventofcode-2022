@@ -51,6 +51,28 @@ fun List<Int>.takeUntil(predicate: Predicate<Int>): List<Int> {
     return filtered
 }
 
+fun List<String>.determinePointFor(targetValue: String): Point =
+    this.flatMapIndexed { indexY, row ->
+        row.mapIndexed { indexX, c ->
+            if (c.toString() == targetValue) Point(
+                indexX,
+                indexY
+            ) else null
+        }
+    }
+        .first { it != null } ?: throw IllegalArgumentException("$targetValue not found")
+
+fun List<String>.determinePointsFor(targetValue: String): List<Point> =
+    this.flatMapIndexed { indexY, row ->
+        row.mapIndexed { indexX, c ->
+            if (c.toString() == targetValue) Point(
+                indexX,
+                indexY
+            ) else null
+        }
+    }
+        .filterNotNull()
+
 typealias Stack<T> = ArrayDeque<T>
 
 fun <T> Stack<T>.push(element: T) = addLast(element)
